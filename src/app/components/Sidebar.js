@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "/dashboards", icon: "home" },
-  { label: "API Playground", href: "#", icon: "code" },
+  { label: "API Playground", href: "/playground", icon: "code" },
   { label: "Use Cases", href: "#", icon: "plus" },
   { label: "Billing", href: "#", icon: "card" },
   { label: "Settings", href: "#", icon: "gear" },
