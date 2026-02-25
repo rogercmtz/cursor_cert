@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession, signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar.js";
 import { NotificationsProvider, useNotifications } from "../components/Notifications.js";
 import { useApiKeys } from "../hooks/useApiKeys.js";
@@ -19,6 +20,7 @@ function DashboardsPage() {
     deleteKey,
   } = useApiKeys();
   const { showToast } = useNotifications();
+  const { data: session } = useSession();
 
   const [modal, setModal] = useState(null);
   const [formName, setFormName] = useState("");
@@ -135,6 +137,29 @@ function DashboardsPage() {
               </h1>
             </div>
             <div className="flex items-center gap-4">
+              {session?.user && (
+                <div className="flex items-center gap-3 rounded-lg border border-zinc-200 bg-zinc-50 pl-2 pr-3 py-1.5 dark:border-zinc-600 dark:bg-zinc-700/50">
+                  {session.user.image && (
+                    <img
+                      src={session.user.image}
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="rounded-full"
+                    />
+                  )}
+                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                    {session.user.name ?? session.user.email}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className="rounded-md border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-600 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">

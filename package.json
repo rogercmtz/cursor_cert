@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.47.10",
     "langchain": "^1.2.27",
     "next": "16.1.6",
+    "next-auth": "^4.24.13",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "typescript": "^5.9.3"
